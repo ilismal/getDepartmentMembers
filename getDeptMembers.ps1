@@ -1,11 +1,10 @@
 $departamentos = Get-ADUser -Filter * -Properties department | Select-Object department -Unique
 $departamentos.department | ForEach-Object {
-    $departamento = $_
-    if ($departamento) {
-        $titulo = "`nUsuarios del departamento " + $departamento
+    if ($_) {
+        $titulo = "`nUsuarios del departamento " + $_
         Write-Host $titulo
         "=" * $titulo.Length
-        Get-ADUser -Properties department -Filter {department -Like $departamento} | Select-Object -Property name
+        Get-ADUser -Properties department -Filter {department -Like $_} | Select-Object -Property name
     }
     else {
         $titulo = "`nUsuarios sin departamento "

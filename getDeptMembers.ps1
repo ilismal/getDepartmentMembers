@@ -1,4 +1,4 @@
-$departamentos = Get-ADUser -Filter * -Properties department | Select-Object department -Unique
+$departamentos = Get-ADUser -Filter * -Properties department -SearchBase "OU=UsersID,DC=dominio,DC=local" | Select-Object department -Unique
 $departamentos.department | ForEach-Object {
     if ($_) {
         $titulo = "`nUsuarios del departamento " + $_
